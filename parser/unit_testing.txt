@@ -1,0 +1,119 @@
+<?php
+/*
+
+UNIT TESTINGS
+
+Stage One
+
+ - Writing and implementing small structures of arrays and testing with it
+
+$data = array (
+  array("Volvo",22,18),
+  array("BMW",15,13),
+  //array("Saab",5,2),
+  //array("Land Rover",17,15),
+  array("Volvo",22,18),
+  array("BMW",15,13),
+  //array("Saab",5,2),
+  array("Land Rover",17,15),
+  array("Volvo",22,18),
+  //array("BMW",15,13),
+  array("Saab",5,2),
+  array("Land Rover",17,15),
+);
+
+
+print_r($data);
+
+Stage 2
+
+ - Testing the code with alternate variable names
+
+$tot_holder = [];
+foreach($data as $row) {
+  $check_holder = [];
+  $check_holder_num = [];
+	foreach($data as $check) {
+		if ($row == $check) {
+			$check_holder = $row;
+			$check_holder_num[] = $row;
+		}
+	}
+	array_push($check_holder, count($check_holder_num));
+	$tot_holder[] = $check_holder;
+}
+
+$results = array();
+
+foreach ($tot_holder as $k => $v) {
+  $results[implode($v)] = $v;
+}
+
+$results = array_values($results);
+
+print_r($results);
+
+Note: Stage 2 was a success and I was able to get the unique combinations from the data set
+
+Stage 3
+
+- Integrating a csv file and watching to see errors
+
+$file = fopen('test.csv', 'r');
+$data = [];
+while (($line = fgetcsv($file)) !== FALSE) {
+  $data[] = $line;
+}
+fclose($file);
+
+Note: Stage 3 was a success and I was able to get the same unique combinations using datta from a csv file
+
+
+Stage 4
+
+- Opening and writing the unique combination results to a csv file
+
+$output = fopen("newfile.csv",'w') or die("Can't open newfile"); 
+foreach ($data as $data_item){
+  for ($i=0; $i < count($data_item); $i++) {
+    $txt = 'car: '.$data_item[0].', in stock: '.$data_item[1].', sold: '.$data_item[2] . PHP_EOL;
+    fwrite($output, $txt);
+    break;
+  }
+}
+fclose($output) or die("newfile");
+
+Note: Stage 4 was a success as I initially worked with the original set of arrays
+
+
+Stage 5
+
+- Wrting unique combination results to new csv file
+
+foreach ($results as $key => $result){
+  $txt = $result[0].','.$result[1].','.$result[2].','.$result[3].','.$result[4].','.$result[5].','.$result[6].','.$result[7] . PHP_EOL;
+  fwrite($output, $txt);
+}
+
+Note: Stage 5 was a success and I was able to successfully write the unique combination results from the csv file to the new csv file
+
+
+Stage 6
+
+- Processing arguments passed into the command line terminal
+
+var_dump($argc); //number of arguments passed 
+var_dump($argv); //the arguments passed
+
+$csv_file = $argv[2];
+
+$unique_combo = explode('=', $argv[3]);
+$unique_combo = $unique_combo[1];
+
+print_r($csv_file);
+print_r($unique_combo);
+
+Note: Stage 6 was a success and I was able to successfully process the passed arguments and use them to execute the script
+
+*/
+?>
